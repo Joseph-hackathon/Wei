@@ -1,0 +1,45 @@
+type Bounty @entity {
+  id: ID!                       # prId as string
+  prId: BigInt!
+  creator: Bytes!               # address
+  token: Bytes!                 # ERC20 token address
+  amount: BigInt!
+  requiredReviews: BigInt!
+  currentReviews: BigInt!
+  isCompleted: Boolean!
+  createdAt: BigInt!
+  completedAt: BigInt
+  reviews: [Review!]! @derivedFrom(field: "bounty")
+}
+
+type Review @entity {
+  id: ID!                       # prId-reviewerAddress
+  bounty: Bounty!
+  reviewer: Bytes!              # address
+  timestamp: BigInt!
+  transactionHash: Bytes!
+  attestation: Attestation
+}
+
+type Attestation @entity {
+  id: ID!                       # review id
+  review: Review!
+  recipient: Bytes!
+  timestamp: BigInt!
+}
+
+type ReviewerStats @entity {
+  id: ID!                       # reviewer address
+  address: Bytes!
+  totalReviews: BigInt!
+  totalEarned: BigInt!
+  lastReviewAt: BigInt!
+}
+
+type ProtocolStats @entity {
+  id: ID!                       # "global"
+  totalBounties: BigInt!
+  totalReviews: BigInt!
+  totalDistributed: BigInt!
+  activeBounties: BigInt!
+}

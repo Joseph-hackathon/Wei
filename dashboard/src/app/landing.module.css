@@ -1,0 +1,798 @@
+.wrapper {
+  min-height: 100vh;
+  background-color: var(--bg-primary, #000000);
+  color: var(--text-primary, #ffffff);
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 4%;
+  background: var(--bg-secondary, #09090b);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border, #27272a);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  background: #2563eb;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: white;
+}
+
+.logoText {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.navLink {
+  color: #a1a1aa;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+
+.navLink:hover {
+  color: white;
+}
+
+.launchBtn {
+  background: white;
+  color: black;
+  padding: 0.7rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.launchBtn:hover {
+  background: #e4e4e7;
+}
+
+/* 1. Hero Section */
+.hero {
+  padding: 6rem 4% 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #a1a1aa;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  color: #2563eb;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #a1a1aa;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 90%;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.primaryBtn {
+  background: #2563eb;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.primaryBtn:hover {
+  background: #1d4ed8;
+}
+
+.secondaryBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.secondaryBtn:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.heroVisual {
+  position: relative;
+  width: 100%;
+}
+
+.heroVisualInner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.heroVisualPlaceholder {
+  color: #555;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* 2. Logo Cloud Marquee */
+.logoCloud {
+  background: var(--bg-card, #121214);
+  padding: 3rem 0;
+  border-top: 1px solid var(--border, #27272a);
+  border-bottom: 1px solid var(--border, #27272a);
+  overflow: hidden;
+  position: relative;
+}
+
+.logoCloudTitle {
+  text-align: center;
+  color: #a1a1aa;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.marquee {
+  display: flex;
+  width: fit-content;
+  animation: scroll 30s linear infinite;
+}
+
+.marqueeContent {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  padding-right: 6rem;
+}
+
+.marqueeLogoImg {
+  height: 48px;
+  width: auto;
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.marqueeLogoImg:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 3. Core Features (Capabilities) */
+.featuresSection {
+  padding: 8rem 4%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.featuresHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 5rem;
+}
+
+.featuresHeader h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.featuresHeader p {
+  font-size: 1.25rem;
+  color: #a1a1aa;
+  line-height: 1.6;
+  align-self: end;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.featureCard {
+  background: transparent;
+  border: 1px solid var(--border, #27272a);
+  padding: 3rem 2.5rem;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.featureCard:hover {
+  border-color: #555;
+}
+
+.iconBox {
+  width: 48px;
+  height: 48px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.featureCard h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.featureCard p {
+  color: #a1a1aa;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* 4. Zigzag Blocks (How it Works) */
+.zigzagSection {
+  padding: 8rem 4%;
+  background: var(--bg-card, #121214);
+  border-top: 1px solid var(--border, #27272a);
+}
+
+.zigzagContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+.zigzagRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.zigzagRow.reverse {
+  direction: rtl;
+}
+
+.zigzagRow.reverse > * {
+  direction: ltr;
+}
+
+.zigzagText h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+.zigzagText p {
+  font-size: 1.125rem;
+  color: #a1a1aa;
+  line-height: 1.7;
+}
+
+.zigzagImageWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zigzagImg {
+  max-width: 75%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 4.5 VS Comparison Section */
+.vsSection {
+  padding: 8rem 4%;
+  background: var(--bg-primary, #000000);
+}
+
+.vsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vsHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.vsHeader h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+}
+
+.vsHeader p {
+  font-size: 1.125rem;
+  color: #a1a1aa;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.vsTable {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  background: var(--bg-card, #121214);
+  border: 1px solid var(--border, #27272a);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.vsHeaderRow {
+  display: contents;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.vsHeaderRow > div {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border, #27272a);
+}
+
+.vsHeaderRow .highlightCol {
+  background: rgba(37, 99, 235, 0.1);
+  color: #60a5fa;
+}
+
+.vsRow {
+  display: contents;
+}
+
+.vsRow > div {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border, #27272a);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #a1a1aa;
+}
+
+.vsRow > div:first-child {
+  font-weight: 600;
+  color: white;
+}
+
+.vsRow .provCol {
+  background: rgba(37, 99, 235, 0.05);
+  color: white;
+  font-weight: 500;
+}
+
+.vsRow .cross {
+  color: #ef4444;
+}
+
+.vsRow .check {
+  color: #10b981;
+}
+
+@media (max-width: 768px) {
+  .vsTable {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 5. Bottom CTA Banner */
+.ctaBanner {
+  padding: 8rem 4%;
+  background: #2563eb;
+  color: white;
+  text-align: center;
+}
+
+.ctaBannerInner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaBanner h2 {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.ctaBanner p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+}
+
+.ctaBannerBtn {
+  display: inline-block;
+  background: white;
+  color: #2563eb;
+  padding: 1.25rem 3rem;
+  border-radius: 4px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.ctaBannerBtn:hover {
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 4%;
+  background: var(--bg-primary, #000000);
+  border-top: 1px solid var(--border, #27272a);
+}
+
+.footerText {
+  color: #71717a;
+  font-size: 0.875rem;
+}
+
+/* 7. Workflow Diagram Section */
+.workflowSection {
+  padding: 6rem 4% 10rem;
+  background: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.workflowHeader {
+  text-align: center;
+  margin-bottom: 6rem;
+  z-index: 10;
+}
+
+.workflowHeader h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+.workflowHeader p {
+  color: #8B8B9E;
+  font-size: 1.125rem;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.workflowContainer {
+  display: grid;
+  grid-template-columns: 320px 60px 320px 60px 320px;
+  grid-template-rows: auto auto 60px auto;
+  width: 100%;
+  max-width: 1140px;
+  gap: 0;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  align-items: stretch;
+}
+
+/* ─── Columns Background ─── */
+.workflowContainer::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0; width: 320px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, transparent 100%);
+  border-left: 1px solid rgba(255,255,255,0.02);
+  border-right: 1px solid rgba(255,255,255,0.02);
+  pointer-events: none;
+}
+.workflowContainer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 380px; width: 320px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, transparent 100%);
+  border-left: 1px solid rgba(255,255,255,0.02);
+  border-right: 1px solid rgba(255,255,255,0.02);
+  pointer-events: none;
+}
+/* We can't do 3 pseudo elements easily, so let's just ignore the 3rd column bg for a second, or use shadow */
+
+/* ─── Grid Placements ─── */
+.head1 { grid-column: 1; grid-row: 1; }
+.head2 { grid-column: 3; grid-row: 1; }
+.head3 { grid-column: 5; grid-row: 1; }
+
+.card1 { grid-column: 1; grid-row: 2; }
+.gap1to2 { grid-column: 2; grid-row: 2; position: relative; }
+.card2 { grid-column: 3; grid-row: 2; }
+.curveTopWrap { grid-column: 4; grid-row: 2; position: relative; }
+.card4 { grid-column: 5; grid-row: 2; }
+
+.gap2to3 { grid-column: 3; grid-row: 3; position: relative; }
+.curveMidWrap { grid-column: 4; grid-row: 3; position: relative; }
+
+.card3 { grid-column: 3; grid-row: 4; }
+.curveBotWrap { grid-column: 4; grid-row: 4; position: relative; }
+
+/* ─── Headers ─── */
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.stepNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ─── Cards ─── */
+.workflowCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  position: relative;
+  z-index: 20;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  height: 100%;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.workflowCard:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.workflowBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badgeForum { background: rgba(255, 255, 255, 0.1); color: #e4e4e7; }
+.badgeEAS { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+.badgeContract { background: rgba(37, 99, 235, 0.2); color: #60a5fa; }
+
+.workflowCardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.workflowCardText {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.workflowCardLink {
+  color: #60a5fa;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.workflowCardLink:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 1.25rem 0;
+}
+
+/* ─── Gaps and Connectors ─── */
+/* Gap 1 to 2 (Row 2, Horizontal) */
+.gap1to2::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  border-top: 1px dashed rgba(255,255,255,0.4);
+}
+.gap1to2 .svgDot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Gap 2 to 3 (Row 3, Vertical) */
+.gap2to3::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  border-left: 1px dashed rgba(255,255,255,0.4);
+}
+.gap2to3 .svgDot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Curve Top (Row 2, Col 4) */
+.curveTopWrap::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 50%; height: 50%;
+  border-left: 1px dashed rgba(255,255,255,0.4);
+  border-top: 1px dashed rgba(255,255,255,0.4);
+  border-top-left-radius: 8px;
+}
+.curveTopWrap .svgDot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Curve Mid (Row 3, Col 4) */
+.curveMidWrap::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  border-left: 1px dashed rgba(255,255,255,0.4);
+}
+.curveMidWrap .svgDot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Curve Bot (Row 4, Col 4) */
+.curveBotWrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 50%;
+  border-right: 1px dashed rgba(255,255,255,0.4);
+  border-bottom: 1px dashed rgba(255,255,255,0.4);
+  border-bottom-right-radius: 8px;
+}
+
+/* SVG Dots */
+.svgDot {
+  width: 20px;
+  height: 20px;
+  z-index: 5;
+}
+.svgDot.blue { color: #4C66FF; }
+.svgDot.green { color: #4BCA81; }
+.svgDot.purple { color: #8b5cf6; }
+
+@media (max-width: 1024px) {
+  .workflowContainer { 
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+  .workflowContainer::before, .workflowContainer::after { display: none; }
+  .head1, .head2, .head3, .card1, .card2, .card3, .card4 { grid-column: 1; grid-row: auto; }
+  .gap1to2, .gap2to3, .curveBotWrap, .curveMidWrap, .curveTopWrap { display: none; }
+  .workflowCard { height: auto; }
+
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .heroContent { align-items: center; }
+  .featuresHeader { grid-template-columns: 1fr; gap: 2rem; }
+  .featuresGrid { grid-template-columns: 1fr 1fr; }
+  .zigzagRow { grid-template-columns: 1fr; gap: 4rem; }
+  .zigzagRow.reverse { direction: ltr; }
+  .title { font-size: 3.5rem; }
+}
+
+@media (max-width: 768px) {
+  .navLinks { display: none; }
+  .featuresGrid { grid-template-columns: 1fr; }
+  .ctaBanner h2 { font-size: 3rem; }
+}

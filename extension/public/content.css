@@ -1,0 +1,257 @@
+/* EIP Nexus GitHub Overlay Styles */
+
+#eip-nexus-panel {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  width: 360px;
+  background: #0d0d14;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(99, 102, 241, 0.2), 0 0 0 1px rgba(99, 102, 241, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#eip-nexus-panel.hidden {
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#eip-nexus-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  cursor: pointer;
+}
+
+#eip-nexus-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+#eip-nexus-logo-icon {
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+#eip-nexus-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: nexus-pulse 2s infinite;
+}
+
+@keyframes nexus-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+#eip-nexus-body {
+  padding: 18px;
+  color: #e0e0f0;
+}
+
+#eip-nexus-pr-info {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 10px;
+}
+
+#eip-nexus-pr-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c7c7ff;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+#eip-nexus-progress-label {
+  font-size: 11px;
+  color: #8888aa;
+  margin-bottom: 5px;
+}
+
+#eip-nexus-progress-bar {
+  height: 5px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#eip-nexus-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #10b981);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+#eip-nexus-bounty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 10px;
+}
+
+#eip-nexus-bounty-amount {
+  font-size: 20px;
+  font-weight: 800;
+  color: #10b981;
+}
+
+#eip-nexus-bounty-label {
+  font-size: 11px;
+  color: #8888aa;
+  margin-top: 2px;
+}
+
+#eip-nexus-world-id-btn {
+  all: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
+  transition: opacity 0.2s, transform 0.2s;
+  margin-bottom: 10px;
+}
+
+#eip-nexus-world-id-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+#eip-nexus-world-id-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#eip-nexus-view-btn {
+  all: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #8888aa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+#eip-nexus-view-btn:hover {
+  color: #c7c7ff;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+#eip-nexus-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 10px;
+  color: #55556b;
+}
+
+#eip-nexus-success {
+  padding: 16px;
+  text-align: center;
+  display: none;
+}
+
+#eip-nexus-success.show {
+  display: block;
+}
+
+#eip-nexus-success-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+#eip-nexus-success-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #10b981;
+  margin-bottom: 4px;
+}
+
+#eip-nexus-success-sub {
+  font-size: 12px;
+  color: #8888aa;
+}
+
+/* Toggle FAB */
+#eip-nexus-fab {
+  all: initial;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  font-family: -apple-system, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+#eip-nexus-fab:hover {
+  transform: scale(1.08);
+}
+
+#eip-nexus-fab.hidden {
+  display: none;
+}

@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NexusCore
+    network: sepolia
+    source:
+      # Replace with deployed contract address after deployment
+      address: "0xb4A698ffd8C151c911Df17bB3356B2DDd88B1337"
+      abi: NexusCore
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Bounty
+        - Review
+        - ReviewerStats
+        - ProtocolStats
+      abis:
+        - name: NexusCore
+          file: ./abis/NexusCore.json
+      eventHandlers:
+        - event: BountyCreated(indexed uint256,indexed address,uint256,uint256)
+          handler: handleBountyCreated
+        - event: ReviewVerified(indexed uint256,indexed address)
+          handler: handleReviewVerified
+        - event: BountyCompleted(indexed uint256)
+          handler: handleBountyCompleted
+      file: ./src/mapping.ts

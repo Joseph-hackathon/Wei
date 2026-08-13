@@ -1,0 +1,3 @@
+export const NEXUS_CORE_ADDRESS = '0xb4A698ffd8C151c911Df17bB3356B2DDd88B1337';
+// Use USDC testnet token address on Sepolia
+export const USDC_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238';

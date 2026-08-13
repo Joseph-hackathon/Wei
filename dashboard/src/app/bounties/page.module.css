@@ -1,0 +1,328 @@
+/* ── Layout ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Hero Banner ── */
+.heroBanner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.0) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.heroTag {
+  display: inline-block;
+  background: rgba(37, 99, 235, 0.1);
+  color: #60a5fa;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.heroSub {
+  color: #a1a1aa;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Stats Grid ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statIconWrapper {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
+
+.statIcon {
+  color: #60a5fa;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #a1a1aa;
+  font-weight: 500;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filterTabs {
+  display: flex;
+  gap: 8px;
+}
+
+.filterTab {
+  background: transparent;
+  border: none;
+  color: #a1a1aa;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterTab:hover {
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+.filterActive {
+  background: rgba(37, 99, 235, 0.1) !important;
+  color: #60a5fa !important;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 250px;
+}
+
+.searchIconSvg {
+  color: #71717a;
+  margin-right: 8px;
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+}
+
+.searchInput::placeholder {
+  color: #71717a;
+}
+
+/* ── Bounty Grid ── */
+.bountyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.bountyCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.bountyCard:hover {
+  border-color: #555;
+  transform: translateY(-2px);
+}
+
+.bountyCompleted {
+  opacity: 0.6;
+}
+
+.bountyCompleted:hover {
+  transform: none;
+  border-color: var(--border);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.protocolInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.protocolLogo {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: 1px solid var(--border);
+}
+
+.protocolName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #a1a1aa;
+}
+
+.prId {
+  font-size: 12px;
+  color: #71717a;
+}
+
+.cardBadges {
+  display: flex;
+  gap: 6px;
+}
+
+.bountyTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: rgba(255,255,255,0.05);
+  color: #a1a1aa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.cardFooter {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bountyAmount {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.amountValue {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+}
+
+.amountToken {
+  font-size: 12px;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.actionGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.deadline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #a1a1aa;
+}
+
+.reviewBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.reviewBtn:hover {
+  background: #e4e4e7;
+}
+
+.reviewBtnDone {
+  background: rgba(255,255,255,0.05);
+  color: #a1a1aa;
+  cursor: not-allowed;
+}
+
+.reviewBtnDone:hover {
+  background: rgba(255,255,255,0.05);
+}

@@ -1,0 +1,17 @@
+{
+  "name": "eip-nexus-cre-workflow",
+  "version": "1.0.0",
+  "description": "Chainlink CRE Workflow for EIP-Nexus",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@chainlink/cre-sdk": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
