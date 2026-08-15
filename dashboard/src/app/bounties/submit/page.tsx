@@ -279,10 +279,10 @@ ${backwardCompatibility || '<!-- Discuss any backwards compatibility issues and 
                       <input 
                         type="number" 
                         required
-                        min="50"
+                        min="5"
                         value={bountyAmount}
                         onChange={(e) => setBountyAmount(e.target.value)}
-                        placeholder="500"
+                        placeholder="50"
                         style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', padding: '14px 16px 14px 44px', borderRadius: '8px', color: 'white', fontSize: '14px', outline: 'none' }}
                       />
                     </div>
