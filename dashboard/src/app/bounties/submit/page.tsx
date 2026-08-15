@@ -29,6 +29,7 @@ export default function SubmitPRPage() {
   const [prUrl, setPrUrl] = useState('');
   const [bountyAmount, setBountyAmount] = useState('');
   const [requiredReviews, setRequiredReviews] = useState('');
+  const [txHash, setTxHash] = useState<string | null>(null);
 
   const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
@@ -98,7 +99,7 @@ ${backwardCompatibility || '<!-- Discuss any backwards compatibility issues and 
       });
 
       // 2. Create Bounty
-      await writeContractAsync({
+      const hash = await writeContractAsync({
         address: NEXUS_CORE_ADDRESS as `0x${string}`,
         abi: NexusCoreABI.abi,
         functionName: 'createBounty',
@@ -110,7 +111,7 @@ ${backwardCompatibility || '<!-- Discuss any backwards compatibility issues and 
         ]
       });
 
-      alert('Bounty created successfully on Sepolia!');
+      setTxHash(hash);
     } catch (error) {
       console.error(error);
       alert('Transaction failed. Check console for details.');
@@ -329,6 +330,33 @@ ${backwardCompatibility || '<!-- Discuss any backwards compatibility issues and 
                   </button>
                 </div>
               </form>
+
+              {/* Success Modal */}
+              {txHash && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+                  <div style={{ background: 'var(--bg-card)', padding: '32px', borderRadius: '16px', border: '1px solid var(--border)', maxWidth: '400px', width: '90%', textAlign: 'center' }}>
+                    <CheckCircle2 size={48} color="#10b981" style={{ margin: '0 auto 16px' }} />
+                    <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px' }}>Transaction Complete!</h3>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '14px', lineHeight: 1.5 }}>
+                      Your bounty has been successfully created on Sepolia testnet. It may take a few minutes for The Graph to index and display it on the main page.
+                    </p>
+                    <a 
+                      href={`https://sepolia.etherscan.io/tx/${txHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'block', width: '100%', background: 'rgba(255,255,255,0.05)', color: '#60a5fa', padding: '12px', borderRadius: '8px', textDecoration: 'none', marginBottom: '12px', fontSize: '14px', fontWeight: 600, border: '1px solid rgba(96, 165, 250, 0.3)' }}
+                    >
+                      View on Etherscan ↗
+                    </a>
+                    <button 
+                      onClick={() => { setTxHash(null); setPrUrl(''); setBountyAmount(''); setRequiredReviews(''); }}
+                      style={{ width: '100%', background: 'var(--gradient-blue)', color: 'white', border: 'none', padding: '12px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
