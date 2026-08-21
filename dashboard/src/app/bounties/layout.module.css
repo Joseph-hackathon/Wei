@@ -17,12 +17,13 @@
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  padding: 24px 16px;
+  padding: 24px 16px 32px 16px;
   position: sticky;
   top: 0;
   height: 100vh;
   flex-shrink: 0;
   backdrop-filter: blur(12px);
+  overflow-y: auto;
 }
 
 .logo {
