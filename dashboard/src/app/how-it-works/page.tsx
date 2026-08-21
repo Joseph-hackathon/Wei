@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar';
 import styles from './how.module.css';
@@ -18,7 +18,7 @@ export default function HowItWorksPage() {
 
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const rowVariants = {
+  const rowVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
@@ -29,18 +29,18 @@ export default function HowItWorksPage() {
     }
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { opacity: 0, x: -30 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
   };
 
-  const visualVariants = {
+  const visualVariants: Variants = {
     hidden: { opacity: 0, x: 30 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
   };
 
   // For nodes on the timeline to pop in when reached
-  const nodeVariants = {
+  const nodeVariants: Variants = {
     hidden: { scale: 0, opacity: 0 },
     visible: { scale: 1, opacity: 1, transition: { type: "spring", stiffness: 300, damping: 20 } }
   };
