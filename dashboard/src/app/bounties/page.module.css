@@ -1,11 +1,11 @@
-/* ── Layout ── */
+/* ?�?� Layout ?�?� */
 .container {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-/* ── Hero Banner ── */
+/* ?�?� Hero Banner ?�?� */
 .heroBanner {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.0) 100%);
   border: 1px solid var(--border);
@@ -27,7 +27,7 @@
   color: #60a5fa;
   padding: 4px 12px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 16px;
   letter-spacing: 0.5px;
@@ -35,7 +35,7 @@
 }
 
 .heroTitle {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
   color: white;
   margin-bottom: 12px;
@@ -44,11 +44,11 @@
 
 .heroSub {
   color: #a1a1aa;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.6;
 }
 
-/* ── Stats Grid ── */
+/* ?�?� Stats Grid ?�?� */
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -81,19 +81,19 @@
 }
 
 .statValue {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: white;
   margin-bottom: 4px;
 }
 
 .statLabel {
-  font-size: 12px;
+  font-size: 18px;
   color: #a1a1aa;
   font-weight: 500;
 }
 
-/* ── Toolbar ── */
+/* ?�?� Toolbar ?�?� */
 .toolbar {
   display: flex;
   justify-content: space-between;
@@ -117,7 +117,7 @@
   color: #a1a1aa;
   padding: 8px 16px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -152,7 +152,7 @@
   background: transparent;
   border: none;
   color: white;
-  font-size: 13px;
+  font-size: 17px;
   outline: none;
   width: 100%;
 }
@@ -161,7 +161,7 @@
   color: #71717a;
 }
 
-/* ── Bounty Grid ── */
+/* ?�?� Bounty Grid ?�?� */
 .bountyGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -213,18 +213,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
   border: 1px solid var(--border);
 }
 
 .protocolName {
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 600;
   color: #a1a1aa;
 }
 
 .prId {
-  font-size: 12px;
+  font-size: 18px;
   color: #71717a;
 }
 
@@ -234,7 +234,7 @@
 }
 
 .bountyTitle {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: white;
   line-height: 1.4;
@@ -253,7 +253,7 @@
   color: #a1a1aa;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 17px;
   font-weight: 500;
 }
 
@@ -279,7 +279,7 @@
 }
 
 .amountToken {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 600;
   color: #60a5fa;
 }
@@ -295,7 +295,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 12px;
+  font-size: 18px;
   color: #a1a1aa;
 }
 
@@ -307,7 +307,7 @@
   color: black;
   padding: 8px 16px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 700;
   text-decoration: none;
   transition: background 0.2s;

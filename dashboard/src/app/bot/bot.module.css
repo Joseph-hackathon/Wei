@@ -1,0 +1,108 @@
+.container {
+  min-height: 100vh;
+  background-color: #0c0a09;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Space Grotesk', sans-serif;
+  display: block;
+}
+
+.inner {
+  max-width: 1600px;
+  width: 100%;
+  padding: 4rem 4%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: center;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(90deg, #fff, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #a1a1aa;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.installCommand {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 1.1rem;
+  color: #60a5fa;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem 0;
+}
+
+.featuresList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: #d4d4d8;
+  font-size: 1.05rem;
+}
+
+.terminalVisual {
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+  position: relative;
+}
+
+.terminalHeader {
+  background: #18181b;
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.dotRed { background: #ef4444; }
+.dotYellow { background: #eab308; }
+.dotGreen { background: #22c55e; }
+
+.terminalContent {
+  padding: 2rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #a1a1aa;
+}
+
+.prompt { color: #fbbf24; }
+.cmd { color: #fff; }
+.comment { color: #71717a; }
+.success { color: #10b981; }
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+}

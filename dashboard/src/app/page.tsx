@@ -4,7 +4,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, Zap, Globe, XCircle, CheckCircle2 } from 'lucide-react';
-import SimulatorCanvas from '../components/simulator/SimulatorCanvas';
 import styles from './landing.module.css';
 
 const GlowingDot = ({ color = '#4C66FF', isCheck = false, className = '' }: { color?: string, isCheck?: boolean, className?: string }) => (
@@ -19,6 +18,8 @@ const GlowingDot = ({ color = '#4C66FF', isCheck = false, className = '' }: { co
     )}
   </svg>
 );
+
+import Navbar from '../components/layout/Navbar';
 
 export default function LandingPage() {
   const containerVariants = {
@@ -36,19 +37,7 @@ export default function LandingPage() {
 
   return (
     <div className={styles.wrapper}>
-      {/* Navbar */}
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <img src="/logos/wei.png" alt="Wei Logo" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
-          <span className={styles.logoText}>Wei</span>
-        </div>
-        <div className={styles.navLinks}>
-          <Link href="#products" className={styles.navLink}>Products</Link>
-          <Link href="#developers" className={styles.navLink}>Developers</Link>
-          <Link href="#resources" className={styles.navLink}>Resources</Link>
-          <Link href="/bounties" className={styles.launchBtn}>Launch App</Link>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* 1. Hero Section (Split Layout) */}
       <motion.section 
@@ -59,21 +48,41 @@ export default function LandingPage() {
       >
         <div className={styles.heroContent}>
           <motion.div variants={itemVariants} className={styles.badge}>
-            DECENTRALIZED PR VERIFICATION INFRASTRUCTURE
+            AUTONOMOUS WEB3 PROPOSAL & PR WORKFLOW
           </motion.div>
           <motion.h1 variants={itemVariants} className={styles.title}>
-            Automate PR <span className={styles.highlight}>Reviews</span>.
+            Automating PRs & <span className={styles.highlight}>Proposals</span>.
           </motion.h1>
           <motion.p variants={itemVariants} className={styles.subtitle}>
-            AI-driven GitHub Pull Request verification with sybil-resistant consensus and automated on-chain bounty payouts.
+            Stop manually reviewing EIPs and GIPs. Wei automates the entire GitHub PR workflow—from AI code validation and human consensus to automated on-chain payouts.
           </motion.p>
           <motion.div variants={itemVariants} className={styles.ctaGroup}>
             <Link href="/bounties" className={styles.primaryBtn}>
               Launch App <ArrowRight size={20} />
             </Link>
-            <Link href="https://github.com/your-repo" className={styles.secondaryBtn}>
-              Read Docs
+            <Link href="/how-it-works" className={styles.secondaryBtn}>
+              How It Works
             </Link>
+          </motion.div>
+
+          {/* Terminal Block */}
+          <motion.div variants={itemVariants} className={styles.terminalBlock}>
+            <div className={styles.terminalHeader}>
+              <span className={`${styles.dot} ${styles.dotRed}`}></span>
+              <span className={`${styles.dot} ${styles.dotYellow}`}></span>
+              <span className={`${styles.dot} ${styles.dotGreen}`}></span>
+            </div>
+            <pre className={styles.terminalContent}>
+              <span className={styles.prompt}>$</span> gh pr comment 123 --body "/wei bounty 50 USDC"
+              <br/>
+              <span className={styles.output}>[+] Bounty initialized! Waiting for payment...</span>
+              <br/>
+              <span className={styles.output}>[+] Payment received via Sepolia.</span>
+              <br/>
+              <span className={styles.output}>[+] AI Sandbox executing dynamic tests... SAFE</span>
+              <br/>
+              <span className={styles.outputWait}>[ ] Awaiting Human Consensus from verified reviewers...</span>
+            </pre>
           </motion.div>
         </div>
         
@@ -112,8 +121,8 @@ export default function LandingPage() {
       {/* 3. Core Features (Capabilities) */}
       <section className={styles.featuresSection}>
         <div className={styles.featuresHeader}>
-          <h2>Wei<br/>Capabilities</h2>
-          <p>Create and manage secure, programmable bounties and automate payouts for open-source protocol contributions across the entire Web3 ecosystem.</p>
+          <h2>Proposal<br/>Automation</h2>
+          <p>Create and manage secure, programmable workflows and automate payouts for open-source EIP/GIP contributions across the entire Web3 ecosystem.</p>
         </div>
         <div className={styles.featuresGrid}>
           <div className={styles.featureCard}>
@@ -139,38 +148,38 @@ export default function LandingPage() {
         <div className={styles.vsContainer}>
           <div className={styles.vsHeader}>
             <h2>Why Wei?</h2>
-            <p>Legacy governance (like <code>eip-review-bot</code> or forum polls) is slow, unincentivized, and vulnerable to sybil attacks. Wei brings accountability and acceleration to protocol upgrades.</p>
+            <p>Legacy GitHub review workflows rely heavily on volunteer work and auto-assign bots, making them slow and vulnerable to Sybil attacks. Wei brings automated incentives, AI verification, and on-chain accountability to PRs.</p>
           </div>
           
           <div className={styles.vsTable}>
             <div className={styles.vsHeaderRow}>
               <div>Feature</div>
-              <div>Legacy Bots & Forums</div>
-              <div className={styles.highlightCol}>Wei Infrastructure</div>
+              <div>Legacy GitHub Workflows</div>
+              <div className={styles.highlightCol}>Wei PR Automation</div>
             </div>
             
             <div className={styles.vsRow}>
-              <div>Reviewer Incentive</div>
+              <div>Reviewer Incentives</div>
               <div><XCircle size={18} className={styles.cross}/> None (Pure volunteer work)</div>
               <div className={styles.provCol}><CheckCircle2 size={18} className={styles.check}/> Automated USDC/GRT Bounties</div>
             </div>
             
             <div className={styles.vsRow}>
-              <div>Sybil Resistance</div>
-              <div><XCircle size={18} className={styles.cross}/> Vulnerable to bot farms</div>
+              <div>Identity Verification</div>
+              <div><XCircle size={18} className={styles.cross}/> Vulnerable to Sybil attacks & bots</div>
               <div className={styles.provCol}><CheckCircle2 size={18} className={styles.check}/> World ID Integration</div>
             </div>
 
             <div className={styles.vsRow}>
               <div>Reputation System</div>
-              <div><XCircle size={18} className={styles.cross}/> Fragmented GitHub commits</div>
+              <div><XCircle size={18} className={styles.cross}/> Scattered GitHub comments</div>
               <div className={styles.provCol}><CheckCircle2 size={18} className={styles.check}/> On-chain EAS Attestations</div>
             </div>
 
             <div className={styles.vsRow}>
-              <div>Validation & Formatting</div>
-              <div><XCircle size={18} className={styles.cross}/> Manual tracking via Auto-assign</div>
-              <div className={styles.provCol}><CheckCircle2 size={18} className={styles.check}/> AI Agent Static Analysis</div>
+              <div>Code Validation</div>
+              <div><XCircle size={18} className={styles.cross}/> Manual review & testing</div>
+              <div className={styles.provCol}><CheckCircle2 size={18} className={styles.check}/> Instant AI Sandbox Analysis</div>
             </div>
           </div>
         </div>
@@ -217,22 +226,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 5. Workflow Simulator Section */}
-      <section className={styles.workflowSection}>
-        <div className={styles.workflowHeader}>
-          <h2>Wei Verification Simulator</h2>
-          <p>Run the simulation to see how a proposal triggers AI and human reviews, culminating in a smart contract bounty payout.</p>
-        </div>
-        <div style={{ width: '100%', maxWidth: '1200px', height: '600px', margin: '0 auto' }}>
-          <SimulatorCanvas />
-        </div>
-      </section>
+
 
       {/* 6. Massive Bottom CTA */}
       <section className={styles.ctaBanner}>
         <div className={styles.ctaBannerInner}>
-          <h2>Ready to scale your protocol's governance?</h2>
-          <p>Join the next generation of decentralized code review and auditing infrastructure.</p>
+          <h2>Ready to automate your protocol's proposals?</h2>
+          <p>Join the next generation of decentralized GitHub workflow automation.</p>
           <Link href="/bounties" className={styles.ctaBannerBtn}>
             Start Building
           </Link>

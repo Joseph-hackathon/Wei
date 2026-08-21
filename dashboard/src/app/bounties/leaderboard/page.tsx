@@ -16,19 +16,19 @@ export default function LeaderboardPage() {
       <div style={{ background: 'var(--bg-card)', borderRadius: '12px', border: '1px solid var(--border)', overflow: 'hidden' }}>
         <div style={{ padding: '32px 32px 24px', borderBottom: '1px solid var(--border)' }}>
           <h2 style={{ fontSize: '28px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '8px' }}>Top Reviewers</h2>
-          <p style={{ color: '#a1a1aa', fontSize: '15px' }}>
-            Ranked by successful PIP reviews and total earned bounties across all protocols.
+          <p style={{ color: '#a1a1aa', fontSize: '17px' }}>
+            Ranked by successful PR consensus reviews and total earned bounties across all protocols.
           </p>
         </div>
 
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
             <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid var(--border)' }}>
-              <th style={{ padding: '20px 32px', fontSize: '12px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px', width: '100px' }}>Rank</th>
-              <th style={{ padding: '20px 32px', fontSize: '12px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Reviewer</th>
-              <th style={{ padding: '20px 32px', fontSize: '12px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Accepted Reviews</th>
-              <th style={{ padding: '20px 32px', fontSize: '12px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Reputation Score</th>
-              <th style={{ padding: '20px 32px', fontSize: '12px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Earned</th>
+              <th style={{ padding: '20px 32px', fontSize: '18px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px', width: '100px' }}>Rank</th>
+              <th style={{ padding: '20px 32px', fontSize: '18px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Reviewer</th>
+              <th style={{ padding: '20px 32px', fontSize: '18px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Accepted Reviews</th>
+              <th style={{ padding: '20px 32px', fontSize: '18px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Reputation Score</th>
+              <th style={{ padding: '20px 32px', fontSize: '18px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Earned</th>
             </tr>
           </thead>
           <tbody>
@@ -50,24 +50,24 @@ export default function LeaderboardPage() {
                   if (!user.address.includes('3f')) e.currentTarget.style.background = 'transparent';
                 }}
               >
-                <td style={{ padding: '24px 32px', fontWeight: 800, fontSize: '20px', color: user.rank === 1 ? '#fbbf24' : user.rank === 2 ? '#9ca3af' : user.rank === 3 ? '#b45309' : 'white' }}>
+                <td style={{ padding: '24px 32px', fontWeight: 800, fontSize: '24px', color: user.rank === 1 ? '#fbbf24' : user.rank === 2 ? '#9ca3af' : user.rank === 3 ? '#b45309' : 'white' }}>
                   #{user.rank}
                 </td>
-                <td style={{ padding: '24px 32px', fontWeight: 600, color: 'white', fontSize: '15px' }}>
-                  {user.address} {user.address.includes('3f') && <span style={{ fontSize: '11px', background: '#2563eb', color: 'white', padding: '4px 8px', borderRadius: '4px', marginLeft: '12px', fontWeight: 700 }}>YOU</span>}
+                <td style={{ padding: '24px 32px', fontWeight: 600, color: 'white', fontSize: '17px' }}>
+                  {user.address} {user.address.includes('3f') && <span style={{ fontSize: '17px', background: '#2563eb', color: 'white', padding: '4px 8px', borderRadius: '4px', marginLeft: '12px', fontWeight: 700 }}>YOU</span>}
                 </td>
-                <td style={{ padding: '24px 32px', color: '#a1a1aa', fontWeight: 500, fontSize: '15px' }}>
+                <td style={{ padding: '24px 32px', color: '#a1a1aa', fontWeight: 500, fontSize: '17px' }}>
                   {user.reviews}
                 </td>
                 <td style={{ padding: '24px 32px', color: '#a1a1aa' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontWeight: 600, color: 'white', fontSize: '15px' }}>{user.reputation}</span>
+                    <span style={{ fontWeight: 600, color: 'white', fontSize: '17px' }}>{user.reputation}</span>
                     <div style={{ width: '80px', height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
                       <div style={{ width: `${user.reputation * 10}%`, height: '100%', background: '#10b981', borderRadius: '3px' }} />
                     </div>
                   </div>
                 </td>
-                <td style={{ padding: '24px 32px', fontWeight: 800, color: '#10b981', fontSize: '16px' }}>
+                <td style={{ padding: '24px 32px', fontWeight: 800, color: '#10b981', fontSize: '18px' }}>
                   ${user.earnings.toLocaleString()}
                 </td>
               </motion.tr>

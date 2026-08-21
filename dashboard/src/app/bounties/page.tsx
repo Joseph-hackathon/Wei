@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { request, gql } from 'graphql-request';
 import styles from './page.module.css';
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ?�?�?� Types ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
 
 interface Bounty {
   id: number;
@@ -43,13 +43,13 @@ const GET_BOUNTIES = gql`
 `;
 
 const STATS = [
-  { label: 'Active Proposals', value: '142', icon: Target },
-  { label: 'Total Distributed', value: '$184,200', icon: DollarSign },
+  { label: 'Active PRs', value: '142', icon: Target },
+  { label: 'USDC Distributed', value: '$184,200', icon: DollarSign },
   { label: 'Verified Reviewers', value: '3,804', icon: UserCheck },
-  { label: 'Reviews Approved', value: '1,387', icon: Shuffle },
+  { label: 'Consensus Reached', value: '1,387', icon: Shuffle },
 ];
 
-// ─── Helper Components ────────────────────────────────────────────────────────
+// ?�?�?� Helper Components ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
 
 function DifficultyBadge({ level }: { level: Bounty['difficulty'] }) {
   const map = {
@@ -59,7 +59,7 @@ function DifficultyBadge({ level }: { level: Bounty['difficulty'] }) {
   };
   const { color, bg } = map[level];
   return (
-    <span style={{ color, background: bg, fontSize: '11px', fontWeight: 600, padding: '4px 10px', borderRadius: '4px' }}>
+    <span style={{ color, background: bg, fontSize: '15px', fontWeight: 600, padding: '4px 10px', borderRadius: '4px' }}>
       {level}
     </span>
   );
@@ -75,7 +75,7 @@ function TypeBadge({ type }: { type: Bounty['type'] }) {
   };
   const { color, bg } = map[type] || map.EIP;
   return (
-    <span style={{ color, background: bg, fontSize: '11px', fontWeight: 700, padding: '4px 10px', borderRadius: '4px', letterSpacing: '0.5px' }}>
+    <span style={{ color, background: bg, fontSize: '15px', fontWeight: 700, padding: '4px 10px', borderRadius: '4px', letterSpacing: '0.5px' }}>
       {type}
     </span>
   );
@@ -87,9 +87,9 @@ function ProgressBar({ current, required }: { current: number; required: number 
   return (
     <div style={{ marginTop: '16px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Review Consensus</span>
-        <span style={{ fontSize: '12px', fontWeight: 600, color: done ? '#10b981' : 'var(--text-primary)' }}>
-          {current}/{required} {done ? '✓ Met' : ''}
+        <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Review Consensus</span>
+        <span style={{ fontSize: '14px', fontWeight: 600, color: done ? '#10b981' : 'var(--text-primary)' }}>
+          {current}/{required} {done ? '??Met' : ''}
         </span>
       </div>
       <div style={{ height: '6px', background: 'var(--border)', borderRadius: '3px', overflow: 'hidden' }}>
@@ -105,7 +105,7 @@ function ProgressBar({ current, required }: { current: number; required: number 
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
+// ?�?�?� Main Page ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
 
 const SUBGRAPH_URL = process.env.NEXT_PUBLIC_SUBGRAPH_URL || 'https://api.studio.thegraph.com/query/12345/eip-nexus-subgraph/version/latest';
 
@@ -134,7 +134,7 @@ export default function Home() {
     prId: `#${b.prId}`,
     title: `PR #${b.prId} (Metadata loaded from Subgraph)`,
     protocol: 'Ethereum',
-    protocolLogo: '⟠',
+    protocolLogo: 'ETH',
     amount: Number(b.rewardAmount) / 1e6, // Assuming USDC 6 decimals
     token: 'USDC',
     requiredReviews: Number(b.requiredReviews),
@@ -168,10 +168,10 @@ export default function Home() {
       {/* Top Banner */}
       <div className={styles.heroBanner}>
         <div className={styles.heroContent}>
-          <div className={styles.heroTag}>Universal PIP Infrastructure</div>
-          <h2 className={styles.heroTitle}>Review Protocols. Earn Bounties.</h2>
+          <div className={styles.heroTag}>PR Workflow Automation</div>
+          <h2 className={styles.heroTitle}>Review PRs. Build Consensus.</h2>
           <p className={styles.heroSub}>
-            Submit World ID-verified code reviews for EIPs, GIPs, and AIPs. Earn USDC/GRT bounties and mint EAS attestations to build your on-chain reputation.
+            Submit World ID-verified code reviews for EIPs, GIPs, and other protocol upgrades. Our AI sandbox runs the tests, you provide the consensus, and smart contracts handle the payouts.
           </p>
         </div>
       </div>
@@ -212,7 +212,7 @@ export default function Home() {
           <select 
             value={statusFilter} 
             onChange={(e) => setStatusFilter(e.target.value as any)}
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: '8px', color: 'white', padding: '8px 12px', fontSize: '13px', outline: 'none' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: '8px', color: 'white', padding: '8px 12px', fontSize: '15px', outline: 'none' }}
           >
             <option value="All" style={{ background: '#121214' }}>All Status</option>
             <option value="Open" style={{ background: '#121214' }}>Open</option>
@@ -222,7 +222,7 @@ export default function Home() {
           <select 
             value={sortBy} 
             onChange={(e) => setSortBy(e.target.value as any)}
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: '8px', color: 'white', padding: '8px 12px', fontSize: '13px', outline: 'none' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: '8px', color: 'white', padding: '8px 12px', fontSize: '15px', outline: 'none' }}
           >
             <option value="Newest" style={{ background: '#121214' }}>Sort by Newest</option>
             <option value="Reward" style={{ background: '#121214' }}>Sort by Highest Reward</option>

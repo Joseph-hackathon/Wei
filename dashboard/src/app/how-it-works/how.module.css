@@ -1,0 +1,215 @@
+.container {
+  min-height: 100vh;
+  background-color: #0c0a09; /* Deep dark background matching the image */
+  color: #fafaf9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4rem 4%;
+}
+
+.headerSection {
+  margin-bottom: 8rem;
+  max-width: 800px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #60a5fa;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.kickerLine {
+  width: 40px;
+  height: 1px;
+  background-color: #60a5fa;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.5rem;
+  color: #f5f5f4;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #a8a29e;
+  line-height: 1.6;
+}
+
+.timeline {
+  position: relative;
+  padding-bottom: 4rem;
+}
+
+/* The central gold line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(59, 130, 246, 0.5); /* subtle blue */
+  transform: translateX(-50%);
+}
+
+.stepRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-bottom: 10rem;
+  position: relative;
+}
+
+/* The wrapper handles the positioning and zig-zag shift */
+.nodeWrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+}
+
+/* Zig-zag node positioning based on text side */
+.stepRow.leftText .nodeWrapper {
+  transform: translate(-100%, -50%); /* Shift fully left so right edge touches center line */
+}
+
+.stepRow.rightText .nodeWrapper {
+  transform: translate(0%, -50%); /* Shift fully right so left edge touches center line */
+}
+
+/* The small square icon */
+.timelineNode {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #3b82f6;
+  background: #0c0a09;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timelineNodeInner {
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  box-shadow: 0 0 10px #60a5fa;
+}
+
+/* Text Content blocks */
+.textContent {
+  padding: 0 4rem;
+}
+
+.stepRow.leftText .textContent {
+  grid-column: 1;
+  text-align: left;
+}
+
+.stepRow.rightText .textContent {
+  grid-column: 2;
+  text-align: left;
+}
+
+.stepNumber {
+  font-family: monospace;
+  color: #a8a29e;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.stepTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.stepDesc {
+  color: #a8a29e;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Visual Mockup blocks */
+.visualContent {
+  padding: 0 4rem;
+}
+
+.stepRow.leftText .visualContent {
+  grid-column: 2;
+}
+
+.stepRow.rightText .visualContent {
+  grid-column: 1;
+}
+
+.mockupCard {
+  background: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+/* Mockup Specific Styles */
+.mockFile {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #09090b;
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  color: #e5e5e5;
+}
+.mockBadge {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: #a1a1aa;
+}
+.mockBadge.danger {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+  .stepRow {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 6rem;
+  }
+  .nodeWrapper {
+    left: 20px;
+    top: 24px;
+    transform: translate(-50%, -50%) !important; /* On mobile, stay centered on the line */
+  }
+  .textContent, .visualContent {
+    padding: 0 0 0 60px !important;
+    grid-column: 1 !important;
+  }
+}

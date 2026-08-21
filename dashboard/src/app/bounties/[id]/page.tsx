@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { MessageSquare, ThumbsUp, DollarSign, Clock, Users, ArrowLeft, ExternalLink, GitPullRequest, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
@@ -40,10 +40,19 @@ export default function BountyDetailPage() {
   const params = useParams();
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
   
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   const { data, isLoading: loading, error } = useQuery({
     queryKey: ['bountyDetail', id],
     queryFn: async () => {
-      return await request(SUBGRAPH_URL, GET_BOUNTY_DETAIL, { id: id?.toLowerCase() || '' });
+      try {
+        const res = await request(SUBGRAPH_URL, GET_BOUNTY_DETAIL, { id: id?.toLowerCase() || '' });
+        return res || null;
+      } catch (err) {
+        console.warn('Subgraph fetch failed:', err);
+        return null; // Return null instead of undefined
+      }
     }
   });
 
@@ -90,8 +99,31 @@ export default function BountyDetailPage() {
   };
 
   const [reviewDraft, setReviewDraft] = useState('');
+  const [sandboxData, setSandboxData] = useState<any>(null);
+  const [sandboxLoading, setSandboxLoading] = useState(false);
   const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
+
+  // Run AI Sandbox analysis on mount
+  useEffect(() => {
+    if (proposal.githubUrl !== '#') {
+      setSandboxLoading(true);
+      fetch('/api/ai/sandbox', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prUrl: proposal.githubUrl })
+      })
+      .then(res => res.json())
+      .then(data => {
+        setSandboxData(data);
+        setSandboxLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setSandboxLoading(false);
+      });
+    }
+  }, [proposal.githubUrl]);
 
   const handleVerify = async (proof: any) => {
     try {
@@ -179,6 +211,46 @@ export default function BountyDetailPage() {
               <GitPullRequest size={18} />
               Read full specification on GitHub <ExternalLink size={14} />
             </a>
+
+            {/* Sandbox AI Review Section */}
+            <div style={{ marginTop: '32px', background: 'var(--bg-card)', padding: '24px', borderRadius: '12px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                <h2 style={{ margin: 0, fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  🤖 Dynamic Sandbox Analysis
+                </h2>
+                {sandboxLoading ? (
+                  <span style={{ fontSize: '14px', color: '#60a5fa', animation: 'pulse 2s infinite' }}>Analyzing in isolated environment...</span>
+                ) : sandboxData ? (
+                  <span style={{ 
+                    padding: '4px 12px', 
+                    borderRadius: '16px', 
+                    fontSize: '12px', 
+                    fontWeight: 700,
+                    background: sandboxData.verdict === 'SAFE' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                    color: sandboxData.verdict === 'SAFE' ? '#10b981' : '#ef4444'
+                  }}>
+                    VERDICT: {sandboxData.verdict}
+                  </span>
+                ) : null}
+              </div>
+              
+              <div style={{ position: 'relative', background: '#000', borderRadius: '8px', padding: '16px', fontFamily: 'monospace', fontSize: '13px', color: '#a3a3a3', overflowX: 'auto', minHeight: '150px' }}>
+                {sandboxLoading && <div className="wei-scanline"></div>}
+                
+                {sandboxLoading ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div>[+] Initializing secure E2B container environment...</div>
+                    <div style={{ color: '#60a5fa' }}>Pulling latest PR code...</div>
+                  </div>
+                ) : sandboxData ? (
+                  <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
+                    {sandboxData.logs}
+                  </pre>
+                ) : (
+                  <div>Waiting for execution...</div>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Discussion Thread */}
@@ -234,9 +306,9 @@ export default function BountyDetailPage() {
                   <button 
                     className={styles.submitReplyBtn} 
                     onClick={() => handleVerify({ proof: '0x0000000000000000000000000000000000000000000000000000000000000000' })}
-                    disabled={!reviewDraft || !address}
+                    disabled={!reviewDraft || (mounted && !address)}
                   >
-                    {!address ? 'Connect Wallet First' : 'Verify with World ID & Submit (Mock)'}
+                    {mounted ? (!address ? 'Connect Wallet First' : 'Verify with World ID & Submit (Mock)') : 'Verify with World ID & Submit (Mock)'}
                   </button>
                 ) : (
                   <button className={styles.submitReplyBtn} disabled>

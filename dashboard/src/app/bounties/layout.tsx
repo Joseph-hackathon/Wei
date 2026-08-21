@@ -3,17 +3,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Target, ClipboardList, Medal, Trophy, Send } from 'lucide-react';
+import { Target, ClipboardList, Trophy, Send, Plug } from 'lucide-react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import styles from './layout.module.css';
 
 const NAV_ITEMS = [
-  { label: 'Bounties', href: '/bounties', icon: Target },
-  { label: 'My Reviews', href: '/bounties/reviews', icon: ClipboardList },
-  { label: 'Attestations', href: '/bounties/attestations', icon: Medal },
+  { label: 'Proposals', href: '/bounties', icon: Target },
+  { label: 'My Dashboard', href: '/bounties/dashboard', icon: ClipboardList },
+  { label: 'Integrations', href: '/bounties/integrations', icon: Plug },
   { label: 'Leaderboard', href: '/bounties/leaderboard', icon: Trophy },
-  { label: 'Submit PR', href: '/bounties/submit', icon: Send },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -30,10 +29,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* ?? Sidebar ?? */}
       <aside className={styles.sidebar}>
         <Link href="/" className={styles.logo}>
-          <img src="/logos/wei.png" alt="Wei Logo" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+          <img src="/logos/wei.png" alt="Wei Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
           <div>
             <div className={styles.logoTitle}>Wei</div>
-            <div className={styles.logoSub}>Universal PIP Review</div>
+            <div className={styles.logoSub}>PR Workflow Automation</div>
           </div>
         </Link>
 
