@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Target, ClipboardList, Trophy, Send, Plug } from 'lucide-react';
+import { Target, ClipboardList, Trophy, Send, Plug, Activity } from 'lucide-react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import styles from './layout.module.css';
@@ -11,6 +11,7 @@ import styles from './layout.module.css';
 const NAV_ITEMS = [
   { label: 'Proposals', href: '/bounties', icon: Target },
   { label: 'My Dashboard', href: '/bounties/dashboard', icon: ClipboardList },
+  { label: 'Network Analytics', href: '/bounties/analytics', icon: Activity },
   { label: 'Integrations', href: '/bounties/integrations', icon: Plug },
   { label: 'Leaderboard', href: '/bounties/leaderboard', icon: Trophy },
 ];
