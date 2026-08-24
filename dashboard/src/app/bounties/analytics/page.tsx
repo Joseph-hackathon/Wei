@@ -7,40 +7,40 @@ import styles from './atlas.module.css';
 
 const BOTS = [
   {
-    id: 'eip-review-bot', title: 'EIP-REVIEW-BOT — ETHEREUM',
-    description: 'Watches for new EIP submissions on the ethereum/EIPs repository.',
-    status: 'AUTONOMOUS', runs: '1,206', sources: '8/9', spent: '$2,450.00', color: '#60a5fa', tvl: '$976M',
-    schema: [ { id: '01', name: 'Ethereum EIP-721', val: '$258M' }, { id: '02', name: 'Ethereum EIP-1155', val: '$217M' } ]
+    id: 'eip-review-bot', title: 'WEI EIP-REVIEWER',
+    description: 'Automates Ethereum EIP structure checks. Assigns USDC bounties for valid E2B static test passes and verifies authors via World ID.',
+    status: 'ACTIVE', runs: '1,206', sources: 'ethereum/EIPs', spent: '2,450 USDC', color: '#60a5fa', volume: '14,200 USDC',
+    prs: [ { id: '#8010', name: 'EIP-7702 Delegation', val: '500 USDC' }, { id: '#7992', name: 'EIP-7540 Async Vault', val: '250 USDC' } ]
   },
   {
-    id: 'gip-bounty-tracker', title: 'GIP-BOUNTY-TRACKER — THE GRAPH',
-    description: 'Tracks Graph Improvement Proposals. Monitors forum activity and GitHub.',
-    status: 'AUTONOMOUS', runs: '432', sources: '4/4', spent: '$800.00', color: '#10b981', tvl: '$312M',
-    schema: [ { id: '01', name: 'GIP-0012 Network Upgrade', val: '$120M' } ]
+    id: 'gip-bounty-tracker', title: 'WEI GIP-TRACKER',
+    description: 'Monitors Graph Improvement Proposals (GIPs). Distributes GRT rewards to verified community reviewers using World ID sybil resistance.',
+    status: 'ACTIVE', runs: '432', sources: 'graphprotocol/GIPs', spent: '80,000 GRT', color: '#10b981', volume: '450,000 GRT',
+    prs: [ { id: '#45', name: 'GIP-0045 Indexer Rewards', val: '5,000 GRT' }, { id: '#52', name: 'GIP-0052 Timeline', val: '2,000 GRT' } ]
   },
   {
-    id: 'l2-rollup-guard', title: 'L2-ROLLUP-GUARD — ARBITRUM',
-    description: 'Read-only monitor for Arbitrum RIPs (Rollup Improvement Proposals).',
-    status: 'READ ONLY', runs: '8,921', sources: '12/12', spent: '$0.00', color: '#a1a1aa', tvl: '$1.2B',
-    schema: [ { id: '01', name: 'Arbitrum RIP-4', val: '$800M' } ]
+    id: 'l2-rollup-guard', title: 'WEI ARBITRUM-GUARD',
+    description: 'Read-only monitor for Arbitrum RIPs. Flags dangerous state transitions in PRs targeting sequencer contracts.',
+    status: 'READ ONLY', runs: '8,921', sources: 'OffchainLabs/RIPs', spent: '0 USDC', color: '#a1a1aa', volume: '0 USDC',
+    prs: [ { id: '#12', name: 'RIP-12 State Root', val: '0 USDC' } ]
   },
   {
-    id: 'optimism-op-bot', title: 'OP-GOV-BOT — OPTIMISM',
-    description: 'Automates OP token grant reviews based on predefined metrics.',
-    status: 'AUTONOMOUS', runs: '241', sources: '2/3', spent: '$1,200.00', color: '#ef4444', tvl: '$450M',
-    schema: [ { id: '01', name: 'RetroPGF Round 3', val: '$300M' } ]
+    id: 'optimism-op-bot', title: 'WEI OP-RETROPGF',
+    description: 'Scans Optimism repositories for RetroPGF contributions and assigns automated review scores before human validation.',
+    status: 'ACTIVE', runs: '241', sources: 'ethereum-optimism', spent: '12,000 OP', color: '#ef4444', volume: '250,000 OP',
+    prs: [ { id: '#102', name: 'Superchain Faucet', val: '1,500 OP' } ]
   },
   {
-    id: 'base-deploy-guard', title: 'BASE-DEPLOY-GUARD — BASE',
-    description: 'Watches factory contract deployments on Base mainnet.',
-    status: 'READ ONLY', runs: '15,023', sources: '1/1', spent: '$0.00', color: '#3b82f6', tvl: '$2.1B',
-    schema: [ { id: '01', name: 'Base Mainnet TVL', val: '$2.1B' } ]
+    id: 'base-deploy-guard', title: 'WEI BASE-INSPECTOR',
+    description: 'Watches factory contract PRs on Base ecosystem repositories to enforce standard proxy patterns.',
+    status: 'READ ONLY', runs: '15,023', sources: 'base-org/contracts', spent: '0 USDC', color: '#3b82f6', volume: '0 USDC',
+    prs: [ { id: '#88', name: 'BaseBridge Upgrade', val: '0 USDC' } ]
   },
   {
-    id: 'zksync-prover', title: 'ZKSYNC-PROVER-BOT — ZKSYNC',
-    description: 'Analyzes zero knowledge proof submissions for validity.',
-    status: 'AUTONOMOUS', runs: '98', sources: '5/5', spent: '$3,400.00', color: '#8b5cf6', tvl: '$890M',
-    schema: [ { id: '01', name: 'zkSync Era', val: '$890M' } ]
+    id: 'zksync-prover', title: 'WEI ZKSYNC-VERIFIER',
+    description: 'Runs static analysis on zkSync Era circuit PRs, distributing bounties to external security researchers.',
+    status: 'ACTIVE', runs: '98', sources: 'matter-labs/zksync', spent: '4,500 USDC', color: '#8b5cf6', volume: '18,000 USDC',
+    prs: [ { id: '#401', name: 'Boojum Prover Update', val: '1,000 USDC' } ]
   }
 ];
 
@@ -101,11 +101,11 @@ function WheelCard({
     >
       <div className={styles.cardHeader}>
         <div className={styles.cardTag} style={{ color: bot.color, border: `1px solid ${bot.color}` }}>
-          {bot.status === 'AUTONOMOUS' ? <ShieldCheck size={12}/> : <Lock size={12}/>}
+          {bot.status === 'ACTIVE' ? <ShieldCheck size={12}/> : <Lock size={12}/>}
           {bot.status}
         </div>
         <span style={{ color: isActive ? bot.color : 'inherit' }}>
-          {isActive ? 'SELECTED' : 'UNPUBLISHED'}
+          {isActive ? 'SELECTED' : 'STANDBY'}
         </span>
       </div>
       
@@ -118,11 +118,11 @@ function WheelCard({
           <div className={styles.statValue}>{bot.runs}</div>
         </div>
         <div>
-          <div className={styles.statLabel}>SOURCES</div>
+          <div className={styles.statLabel}>REPO</div>
           <div className={styles.statValue}>{bot.sources}</div>
         </div>
         <div>
-          <div className={styles.statLabel}>SPENT</div>
+          <div className={styles.statLabel}>BOUNTIES</div>
           <div className={styles.statValue}>{bot.spent}</div>
         </div>
       </div>
@@ -153,9 +153,9 @@ export default function AnalyticsPage() {
             <div className={styles.panelHeader} style={{ borderTop: `4px solid ${activeBot.color}` }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div className={styles.panelMeta}>
-                  <span>POLICY @0x4a...9b1c</span>
-                  <span className={styles.metaHighlight}>SERVER-ENFORCED</span>
-                  <span>CAP $5,000.00</span>
+                  <span>WEI CONFIG @{activeBot.id}</span>
+                  <span className={styles.metaHighlight}>WORLD ID VERIFIED</span>
+                  <span>AUTO-PAYOUTS</span>
                 </div>
                 <button 
                   onClick={() => setActiveBot(null)} 
@@ -166,13 +166,13 @@ export default function AnalyticsPage() {
               </div>
               
               <div className={styles.panelMeta} style={{ marginBottom: 24 }}>
-                <span>2 ALLOWLISTED</span>
-                <span>EXPIRES 2026-12-31</span>
+                <span>BOUNTY LIMIT $5,000.00</span>
+                <span>MAX PER PR 500 USDC</span>
               </div>
               
               <h2 className={styles.panelTitle}>{activeBot.title}</h2>
               <div className={styles.panelSub}>
-                {activeBot.status === 'AUTONOMOUS' ? 'published — on-chain attestation issued' : 'unpublished — read only mode'}
+                {activeBot.status === 'ACTIVE' ? 'Running on GitHub Webhooks — E2B Sandbox Enabled' : 'Dry-run Mode — Read Only'}
               </div>
               
               <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '24px' }}>
@@ -183,27 +183,27 @@ export default function AnalyticsPage() {
                 <div className={styles.cardTag} style={{ background: activeBot.color, color: '#000', marginRight: '8px' }}>
                   {activeBot.status}
                 </div>
-                <button className={styles.btnSecondary}>Run</button>
-                <button className={styles.btnSecondary}>Watch 3 blocks</button>
-                <button className={styles.btnSecondary}>Fork</button>
+                <button className={styles.btnSecondary}>Sync Webhook</button>
+                <button className={styles.btnSecondary}>View Logs</button>
+                <button className={styles.btnSecondary}>Edit Policy</button>
               </div>
             </div>
 
             <div className={styles.panelBody}>
               <div className={styles.tvlBlock}>
-                <div className={styles.tvlLabel}>Total Value Secured</div>
-                <div className={styles.tvlValue}>{activeBot.tvl}</div>
+                <div className={styles.tvlLabel}>Total Bounties Distributed</div>
+                <div className={styles.tvlValue}>{activeBot.volume}</div>
                 <div className={styles.tvlDesc}>
-                  Summed across {activeBot.schema.length} active protocol integrations. 
+                  Total volume of automated rewards paid out to contributors on {activeBot.sources} via the Wei Smart Contracts.
                 </div>
               </div>
 
               <div className={styles.dataTable}>
                 <div className={styles.tableHeader}>
-                  <span>CROSS SCHEMA TVL</span>
-                  <span>{activeBot.schema.length} ranked entries</span>
+                  <span>RECENT AUTOMATED PRs</span>
+                  <span>{activeBot.prs.length} latest entries</span>
                 </div>
-                {activeBot.schema.map((item) => (
+                {activeBot.prs.map((item) => (
                   <div key={item.id} className={styles.tableRow}>
                     <div className={styles.tableColId}>{item.id}</div>
                     <div className={styles.tableColName}>{item.name}</div>
@@ -278,13 +278,6 @@ export default function AnalyticsPage() {
         ref={scrollContainerRef}
         style={{ overflowY: 'auto', overflowX: 'hidden' }}
       >
-        <div style={{ position: 'sticky', top: '60px', left: '75%', marginLeft: '-230px', zIndex: 60, pointerEvents: 'none', width: '460px' }}>
-          <div className={styles.canvasTitle}>
-            <Search size={24} color="#60a5fa" />
-            EXPLORE MINI APPS ON THE GRAPH
-          </div>
-        </div>
-        
         {/* Scrollable track */}
         <div style={{ height: `${BOTS.length * 400}px`, position: 'relative' }}>
           {/* Sticky container for the 3D items */}
