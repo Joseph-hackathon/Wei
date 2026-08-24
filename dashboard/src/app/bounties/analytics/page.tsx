@@ -278,7 +278,7 @@ export default function AnalyticsPage() {
         ref={scrollContainerRef}
         style={{ overflowY: 'auto', overflowX: 'hidden' }}
       >
-        <div style={{ position: 'sticky', top: '60px', left: '70%', transform: 'translateX(-230px)', zIndex: 60, pointerEvents: 'none' }}>
+        <div style={{ position: 'sticky', top: '60px', left: '75%', marginLeft: '-230px', zIndex: 60, pointerEvents: 'none', width: '460px' }}>
           <div className={styles.canvasTitle}>
             <Search size={24} color="#60a5fa" />
             EXPLORE MINI APPS ON THE GRAPH
