@@ -74,8 +74,11 @@ function WheelCard({
   const currentAngle = useTransform(scrollYProgress, [0, 1], [baseAngle, baseAngle - totalAngle]);
 
   // Transform string combining rotation and translation to form a wheel
-  // We rotate on X axis, translate out by radius (1000px), then slightly tilt on Y
-  const transform = useTransform(currentAngle, (a) => `rotateX(${a}deg) translateZ(1000px) rotateY(-10deg)`);
+  // We translate the center of the wheel back by the radius (800px), 
+  // rotate on X axis, then translate OUT by the radius so the front-most card is at Z=0 (normal size).
+  const transform = useTransform(currentAngle, (a) => 
+    `translateZ(-800px) rotateX(${a}deg) translateZ(800px) rotateY(-10deg)`
+  );
   
   // Also fade out items that rotate too far out of view
   const opacity = useTransform(currentAngle, [-60, -30, 0, 30, 60], [0, 0.3, 1, 0.3, 0]);
