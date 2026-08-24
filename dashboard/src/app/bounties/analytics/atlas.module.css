@@ -115,7 +115,7 @@
   top: 16px;
   left: 16px;
   bottom: 16px;
-  width: 440px;
+  width: 560px; /* Increased width to prevent text squishing */
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -166,6 +166,8 @@
 .panelActions {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap; /* Allow buttons to wrap properly without breaking */
+  align-items: center;
 }
 
 .btnPrimary {
@@ -182,10 +184,16 @@
   background: rgba(255,255,255,0.05);
   color: white;
   border: 1px solid var(--border);
-  padding: 6px 16px;
+  padding: 8px 16px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnSecondary:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 .panelBody {
@@ -255,9 +263,14 @@
 }
 
 .tableColId {
-  width: 30px;
+  width: 50px; /* Increased to fix squished text */
   font-family: monospace;
   color: var(--accent-blue-light);
+  text-decoration: none;
+}
+
+.tableColId:hover {
+  text-decoration: underline;
 }
 
 .tableColName {

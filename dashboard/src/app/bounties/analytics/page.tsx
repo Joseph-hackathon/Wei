@@ -205,7 +205,14 @@ export default function AnalyticsPage() {
                 </div>
                 {activeBot.prs.map((item) => (
                   <div key={item.id} className={styles.tableRow}>
-                    <div className={styles.tableColId}>{item.id}</div>
+                    <a 
+                      href={`https://thegraph.com/explorer/subgraphs?search=${item.id.replace('#', '')}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles.tableColId}
+                    >
+                      {item.id}
+                    </a>
                     <div className={styles.tableColName}>{item.name}</div>
                     <div className={styles.tableColVal}>{item.val}</div>
                   </div>
