@@ -89,7 +89,7 @@ function WheelCard({
       style={{
         position: 'absolute',
         top: '50%',
-        left: '60%', // Moved from 90% to 60% so it doesn't get cut off on the right
+        left: '75%', // Moved to the right as requested
         marginLeft: '-230px',
         marginTop: '-120px',
         transform,
@@ -278,7 +278,7 @@ export default function AnalyticsPage() {
         ref={scrollContainerRef}
         style={{ overflowY: 'auto', overflowX: 'hidden' }}
       >
-        <div style={{ position: 'sticky', top: '40px', left: '380px', zIndex: 60, pointerEvents: 'none' }}>
+        <div style={{ position: 'sticky', top: '60px', left: '70%', transform: 'translateX(-230px)', zIndex: 60, pointerEvents: 'none' }}>
           <div className={styles.canvasTitle}>
             <Search size={24} color="#60a5fa" />
             EXPLORE MINI APPS ON THE GRAPH
