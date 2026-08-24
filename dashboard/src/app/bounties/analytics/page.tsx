@@ -1,11 +1,10 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ShieldCheck, Search, Lock, X } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { ShieldCheck, Search, Lock, X, Activity } from 'lucide-react';
 import styles from './atlas.module.css';
 
-// Expand to 6 items to show the wheel effect better
 const BOTS = [
   {
     id: 'eip-review-bot', title: 'EIP-REVIEW-BOT — ETHEREUM',
@@ -45,33 +44,108 @@ const BOTS = [
   }
 ];
 
-export default function AnalyticsPage() {
-  // 1. Initial state is null, so left panel is hidden.
-  const [activeBot, setActiveBot] = useState<typeof BOTS[0] | null>(null);
-
-  // 2. Scroll container for the roulette effect
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+// Helper component to calculate and apply 3D transforms per card based on scroll
+function WheelCard({ 
+  bot, 
+  index, 
+  total, 
+  scrollYProgress, 
+  isActive, 
+  onClick 
+}: { 
+  bot: typeof BOTS[0], 
+  index: number, 
+  total: number, 
+  scrollYProgress: MotionValue<number>,
+  isActive: boolean,
+  onClick: () => void
+}) {
+  // We want the wheel to rotate fully depending on how many items there are.
+  // When scrollYProgress is 0, index 0 is at 0deg.
+  // When scrollYProgress is 1, the last item is at 0deg.
+  // Total angle range to scroll through: (total - 1) * 25 degrees.
+  const anglePerItem = 25;
+  const totalAngle = (total - 1) * anglePerItem;
   
-  // Track scroll progress of the hidden scroll layer
-  const { scrollYProgress } = useScroll({ container: scrollContainerRef });
+  // Base angle for this specific card
+  const baseAngle = index * anglePerItem;
+  
+  // Current angle = baseAngle - (scrollProgress * totalAngle)
+  const currentAngle = useTransform(scrollYProgress, [0, 1], [baseAngle, baseAngle - totalAngle]);
 
-  // Map scroll progress (0 to 1) to a rotation angle. 
-  // e.g. 0% = 0deg, 100% = -100deg (rotates the wheel up)
-  const wheelRotation = useTransform(scrollYProgress, [0, 1], [0, -(BOTS.length * 15)]);
+  // Transform string combining rotation and translation to form a wheel
+  // We rotate on X axis, translate out by radius (1000px), then slightly tilt on Y
+  const transform = useTransform(currentAngle, (a) => `rotateX(${a}deg) translateZ(1000px) rotateY(-10deg)`);
+  
+  // Also fade out items that rotate too far out of view
+  const opacity = useTransform(currentAngle, [-60, -30, 0, 30, 60], [0, 0.3, 1, 0.3, 0]);
+
+  return (
+    <motion.div
+      className={`${styles.floatingCard} ${isActive ? styles.active : ''}`}
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '60%', // Moved from 90% to 60% so it doesn't get cut off on the right
+        marginLeft: '-230px',
+        marginTop: '-120px',
+        transform,
+        opacity,
+        zIndex: isActive ? 50 : 10,
+        pointerEvents: 'auto'
+      }}
+      onClick={onClick}
+    >
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTag} style={{ color: bot.color, border: `1px solid ${bot.color}` }}>
+          {bot.status === 'AUTONOMOUS' ? <ShieldCheck size={12}/> : <Lock size={12}/>}
+          {bot.status}
+        </div>
+        <span style={{ color: isActive ? bot.color : 'inherit' }}>
+          {isActive ? 'SELECTED' : 'UNPUBLISHED'}
+        </span>
+      </div>
+      
+      <h3 className={styles.cardTitle}>{bot.title}</h3>
+      <p className={styles.cardDesc}>{bot.description}</p>
+      
+      <div className={styles.cardStats}>
+        <div>
+          <div className={styles.statLabel}>RUNS</div>
+          <div className={styles.statValue}>{bot.runs}</div>
+        </div>
+        <div>
+          <div className={styles.statLabel}>SOURCES</div>
+          <div className={styles.statValue}>{bot.sources}</div>
+        </div>
+        <div>
+          <div className={styles.statLabel}>SPENT</div>
+          <div className={styles.statValue}>{bot.spent}</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function AnalyticsPage() {
+  const [activeBot, setActiveBot] = useState<typeof BOTS[0] | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ container: scrollContainerRef });
 
   return (
     <div className={styles.container}>
       
-      {/* LEFT: Overlay Detailed Panel */}
+      {/* LEFT: Overlay Detailed Panel or Idle Animation */}
       <AnimatePresence mode="wait">
-        {activeBot && (
+        {activeBot ? (
           <motion.div 
-            key={activeBot.id}
+            key="panel"
             className={styles.overlayPanel}
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -20, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            style={{ zIndex: 100 }}
           >
             <div className={styles.panelHeader} style={{ borderTop: `4px solid ${activeBot.color}` }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -136,90 +210,100 @@ export default function AnalyticsPage() {
               </div>
             </div>
           </motion.div>
+        ) : (
+          <motion.div
+            key="idle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '15%',
+              transform: 'translateY(-50%)',
+              width: '400px',
+              zIndex: 10,
+              pointerEvents: 'none'
+            }}
+          >
+            {/* Idle Animation Graphic */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: 'var(--accent-blue-light)' }}>
+                <Activity size={32} className="animate-pulse" />
+                <h2 style={{ fontFamily: 'monospace', letterSpacing: '2px', fontSize: '18px' }}>NETWORK ACTIVE</h2>
+              </div>
+              
+              <div style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', background: 'rgba(0,0,0,0.2)' }}>
+                <p style={{ color: 'var(--text-secondary)', fontFamily: 'monospace', fontSize: '12px', lineHeight: 2 }}>
+                  &gt; INDEXING SUBGRAPHS...<br/>
+                  <span style={{ color: '#10b981' }}>[OK]</span> Wei Core Proxy Synced<br/>
+                  <span style={{ color: '#10b981' }}>[OK]</span> 14,302 Events Processed<br/>
+                  &gt; WAITING FOR SELECTION...<br/>
+                  <br/>
+                  <span style={{ color: 'var(--text-muted)' }}>// Click any node on the right to intercept real-time telemetry and fork its automation policy.</span>
+                </p>
+              </div>
+              
+              {/* Simulated data stream visualization */}
+              <div style={{ display: 'flex', gap: '4px', height: '60px', alignItems: 'flex-end', opacity: 0.5 }}>
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    style={{
+                      width: '12px',
+                      background: 'var(--accent-blue-light)',
+                      borderRadius: '2px 2px 0 0'
+                    }}
+                    animate={{ height: ['10%', '100%', '30%', '80%', '10%'] }}
+                    transition={{
+                      duration: 2 + Math.random() * 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: Math.random() * 2
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* RIGHT: 3D Canvas Context (Now the scroll container itself) */}
+      {/* RIGHT: 3D Canvas Context */}
       <div 
         className={styles.canvas} 
         ref={scrollContainerRef}
-        style={{ overflowY: 'auto' }}
+        style={{ overflowY: 'auto', overflowX: 'hidden' }}
       >
-        <div style={{ position: 'sticky', top: '40px', left: '380px', zIndex: 10 }}>
+        <div style={{ position: 'sticky', top: '40px', left: '380px', zIndex: 60, pointerEvents: 'none' }}>
           <div className={styles.canvasTitle}>
             <Search size={24} color="#60a5fa" />
             EXPLORE MINI APPS ON THE GRAPH
           </div>
         </div>
         
-        {/* Huge height wrapper to enable scrolling */}
+        {/* Scrollable track */}
         <div style={{ height: `${BOTS.length * 400}px`, position: 'relative' }}>
-          
-          {/* The visual 3D wheel container, sticky to the viewport center */}
-          <motion.div 
-            style={{
-              position: 'sticky',
-              top: '50%',
-              left: '90%', // Push to the right
-              width: '1px',
-              height: '1px',
-              transformStyle: 'preserve-3d',
-              rotateX: wheelRotation, // Rotate the entire wheel based on scroll
-            }}
-          >
-            {BOTS.map((bot, index) => {
-              // Each card is distributed along a circle around the X-axis
-              const angle = index * 18; // 18 degrees between cards
-              const radius = 900; // Large radius makes it feel like a gentle curve
-              
-              return (
-                <div 
+          {/* Sticky container for the 3D items */}
+          <div style={{ position: 'sticky', top: 0, width: '100%', height: '100vh', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', width: '100%', height: '100%', perspective: '1200px' }}>
+              {BOTS.map((bot, index) => (
+                <WheelCard 
                   key={bot.id}
-                  className={`${styles.floatingCard} ${activeBot?.id === bot.id ? styles.active : ''}`}
-                  style={{
-                    // Center the card on the 1x1px origin before translating
-                    marginLeft: '-230px',
-                    marginTop: '-120px', 
-                    // Rotate to its slot on the wheel, then push it out by the radius
-                    transform: `rotateX(${angle}deg) translateZ(${radius}px) rotateY(-15deg)`,
-                  }}
+                  bot={bot}
+                  index={index}
+                  total={BOTS.length}
+                  scrollYProgress={scrollYProgress}
+                  isActive={activeBot?.id === bot.id}
                   onClick={() => setActiveBot(bot)}
-                >
-                  <div className={styles.cardHeader}>
-                    <div className={styles.cardTag} style={{ color: bot.color, border: `1px solid ${bot.color}` }}>
-                      {bot.status === 'AUTONOMOUS' ? <ShieldCheck size={12}/> : <Lock size={12}/>}
-                      {bot.status}
-                    </div>
-                    <span style={{ color: activeBot?.id === bot.id ? bot.color : 'inherit' }}>
-                      {activeBot?.id === bot.id ? 'SELECTED' : 'UNPUBLISHED'}
-                    </span>
-                  </div>
-                  
-                  <h3 className={styles.cardTitle}>{bot.title}</h3>
-                  <p className={styles.cardDesc}>{bot.description}</p>
-                  
-                  <div className={styles.cardStats}>
-                    <div>
-                      <div className={styles.statLabel}>RUNS</div>
-                      <div className={styles.statValue}>{bot.runs}</div>
-                    </div>
-                    <div>
-                      <div className={styles.statLabel}>SOURCES</div>
-                      <div className={styles.statValue}>{bot.sources}</div>
-                    </div>
-                    <div>
-                      <div className={styles.statLabel}>SPENT</div>
-                      <div className={styles.statValue}>{bot.spent}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Legend */}
-        <div style={{ position: 'sticky', bottom: '24px', left: '100%', transform: 'translateX(-340px)', fontFamily: 'monospace', fontSize: '11px', color: 'var(--text-muted)', zIndex: 5, paddingBottom: '24px' }}>
+        <div style={{ position: 'sticky', bottom: '24px', left: '100%', transform: 'translateX(-340px)', fontFamily: 'monospace', fontSize: '11px', color: 'var(--text-muted)', zIndex: 60, paddingBottom: '24px', pointerEvents: 'none' }}>
           scroll down to rotate wheel — click another card to switch
         </div>
       </div>
