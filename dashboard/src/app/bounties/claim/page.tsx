@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { IDKitWidget, ISuccessResult } from '@worldcoin/idkit';
-import { CheckCircle, Github, Wallet } from 'lucide-react';
+import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit';
+import { CheckCircle, Code, Wallet } from 'lucide-react';
 import styles from './claim.module.css';
 
 export default function ClaimBountyPage() {
@@ -38,7 +38,7 @@ export default function ClaimBountyPage() {
         {/* Step 1: GitHub */}
         <div className={styles.step}>
           <div className={styles.stepHeader}>
-            <Github size={20} />
+            <Code size={20} />
             <h2>1. Link GitHub Account</h2>
           </div>
           <input 
@@ -79,7 +79,7 @@ export default function ClaimBountyPage() {
             <IDKitWidget
               app_id="app_staging_placeholder" // Get a real app_id from Worldcoin Developer Portal for prod
               action="verify_bounty_hunter"
-              verification_level="device" // Or "orb" for strict
+              verification_level={VerificationLevel.Device} // Or Orb for strict
               handleVerify={handleVerify}
               onSuccess={handleVerify}
             >
