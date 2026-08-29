@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { triggerBountyPayout } from '@/lib/oracle';
 
 // Secret used to verify GitHub webhook payloads (mock for hackathon)
 const WEBHOOK_SECRET = 'super_secret_webhook_key_12345';
@@ -47,6 +48,25 @@ export async function POST(req: Request) {
       // Check if it's a review command: "/wei review"
       if (commentBody.startsWith('/wei review')) {
         console.log(`🕵️ [Wei Bot] Triggered! Initiating Sandbox AI Review for PR #${issueNumber}`);
+        // Simulate E2B passing...
+        console.log(`[E2B Sandbox] Analysis passed! PR is valid.`);
+      }
+
+      // Check if it's a payout command: "/wei payout 0x..."
+      if (commentBody.startsWith('/wei payout')) {
+        const parts = commentBody.split(' ');
+        const address = parts[2];
+        if (address && address.startsWith('0x')) {
+          console.log(`[Wei Bot] Triggered payout to ${address}`);
+          // Mock nullifier hash (in reality, look this up from a DB where the user verified World ID)
+          const mockNullifier = BigInt(Math.floor(Math.random() * 1000000));
+          // Mock amount: 100 USDC (6 decimals = 100000000)
+          const amount = BigInt(100 * 1000000); 
+          
+          triggerBountyPayout(repoFullName, address, amount, mockNullifier).catch(console.error);
+        } else {
+          console.log(`[Wei Bot] Invalid address provided for payout.`);
+        }
       }
     }
 
