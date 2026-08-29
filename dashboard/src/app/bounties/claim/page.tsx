@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit';
+import { IDKitWidget, ISuccessResult } from '@worldcoin/idkit';
 import { CheckCircle, Github, Wallet } from 'lucide-react';
 import styles from './claim.module.css';
 
@@ -79,7 +79,7 @@ export default function ClaimBountyPage() {
             <IDKitWidget
               app_id="app_staging_placeholder" // Get a real app_id from Worldcoin Developer Portal for prod
               action="verify_bounty_hunter"
-              verification_level={VerificationLevel.Device} // Or Orb for strict
+              verification_level="device" // Or "orb" for strict
               handleVerify={handleVerify}
               onSuccess={handleVerify}
             >
